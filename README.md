@@ -1,16 +1,58 @@
-# cyber_clinic
+Register 
 
-A new Flutter project.
+- password vali feedback (done)
+- Password Strength (done)
+- phone vali (done)
+- email vali (done)
+- captcha (done)
+- 2 FA ()
+- Password Obscure (done)
 
-## Getting Started
+========
 
-This project is a starting point for a Flutter application.
+- password encrypt / decrypt (Firebase Auth)
 
-A few resources to get you started if this is your first Flutter project:
+========
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Login
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- email validator (done)
+- forgot password (done)
+- password attempts (done)
+- Password Obscure (done)
+- 2 FA ()
+
+========
+
+
+Home 
+
+- Just UI (done)
+
+=========
+
+Profile
+
+- change password
+- delete acc
+- change name
+- change phone
+- change age
+
+=========
+
+Theme
+
+- light mode (done)
+- Dark mode (done)
+
+=========
+
+
+Admin Dash
+
+- user info list (stream)
+- ban User
+- login UI
+
+=========
