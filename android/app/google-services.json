@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694671142414",
+    "project_id": "cyber-clinic-2a122",
+    "storage_bucket": "cyber-clinic-2a122.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694671142414:android:b5ada84962a1ace3e2165f",
+        "android_client_info": {
+          "package_name": "com.example.cyber_clinic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4RgOapuG6ZkuSeDh-5UxFq6X0LMme1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
