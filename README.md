@@ -5,7 +5,7 @@ Register
 - phone vali (done)
 - email vali (done)
 - captcha (done)
-- 2 FA ()
+- 2 FA (done)
 - Password Obscure (done)
 
 ========
@@ -19,8 +19,9 @@ Login
 - email validator (done)
 - forgot password (done)
 - password attempts (done)
+- Restrict timer (done)
 - Password Obscure (done)
-- 2 FA ()
+- 2 FA (done)
 
 ========
 
