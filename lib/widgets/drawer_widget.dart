@@ -1,4 +1,5 @@
 import 'package:cyber_clinic/BLoC/auth/auth_cubit.dart';
+import 'package:cyber_clinic/screens/auth_screen.dart';
 
 import 'package:cyber_clinic/screens/profile_screen.dart';
 import 'package:cyber_clinic/screens/settings_screen.dart';
@@ -50,10 +51,12 @@ class CustomDrawerWidget extends StatelessWidget {
               ),
               const Spacer(),
               CustomDrawerTileWidget(
-                title: "L O G O U T",
-                icon: Icons.logout,
-                function: () => authCubit.logout(),
-              )
+                  title: "L O G O U T",
+                  icon: Icons.logout,
+                  function: () {
+                    authCubit.logout();
+                    context.navigateWithReplacement(const AuthScreen());
+                  })
             ],
           ),
         ),
