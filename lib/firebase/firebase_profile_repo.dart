@@ -1,9 +1,12 @@
 import 'package:cyber_clinic/data/vos/app_user_vo.dart';
 import 'package:cyber_clinic/domain/profile_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class FirebaseProfileRepo implements ProfileRepo {
   final databaseRef = FirebaseDatabase.instance.ref();
+
+  final firebaseAuth = FirebaseAuth.instance;
 
   //Fetch User Profile
 
@@ -32,6 +35,25 @@ class FirebaseProfileRepo implements ProfileRepo {
           .child("users")
           .child(updatedProfile.uid)
           .set(updatedProfile.toJson());
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  //Change Password
+
+  @override
+  Future<void> changePassword(String oldPassword, String newPassword) async {
+    try {
+      await firebaseAuth
+          .signInWithEmailAndPassword(
+              email: firebaseAuth.currentUser?.email ?? "",
+              password: oldPassword)
+          .then(
+        (value) async {
+          await firebaseAuth.currentUser?.updatePassword(newPassword);
+        },
+      );
     } catch (error) {
       throw Exception(error);
     }

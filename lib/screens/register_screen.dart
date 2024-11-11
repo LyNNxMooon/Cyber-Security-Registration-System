@@ -1,11 +1,12 @@
 // ignore_for_file: unused_field
 
 import 'package:cyber_clinic/BLoC/auth/auth_cubit.dart';
-import 'package:cyber_clinic/BLoC/auth/auth_states.dart';
+
 import 'package:cyber_clinic/config/captcha_config_form.dart';
 import 'package:cyber_clinic/constants/colors.dart';
 import 'package:cyber_clinic/utils/enums.dart';
 import 'package:cyber_clinic/widgets/button_widget.dart';
+import 'package:cyber_clinic/widgets/password_condition_widget.dart';
 import 'package:cyber_clinic/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -139,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 color: Theme.of(context).colorScheme.primary,
                               )),
                   ),
-                  passwordCondition(context),
+                  PasswordConditionWidget(),
                   const Gap(10),
                   CustomTextField(
                     minLines: 1,
@@ -345,43 +346,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget passwordCondition(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthStates>(
-      builder: (context, authState) {
-        if (authState is Unauthenticated) {
-          if (authState.condition == PasswordCondition.error ||
-              authState.condition == PasswordCondition.init) {
-            return SizedBox();
-          } else {
-            return Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                authState.condition == PasswordCondition.weak
-                    ? "Weak!"
-                    : authState.condition == PasswordCondition.good
-                        ? "Good!"
-                        : authState.condition == PasswordCondition.strong
-                            ? "Strong!"
-                            : "",
-                style: TextStyle(
-                    color: authState.condition == PasswordCondition.weak
-                        ? kWeakPasswordColor
-                        : authState.condition == PasswordCondition.good
-                            ? kGoodPasswordColor
-                            : authState.condition == PasswordCondition.strong
-                                ? kStrongPasswordColor
-                                : kStrongPasswordColor,
-                    fontWeight: FontWeight.bold),
-              ),
-            );
-          }
-        } else {
-          return SizedBox();
-        }
-      },
     );
   }
 

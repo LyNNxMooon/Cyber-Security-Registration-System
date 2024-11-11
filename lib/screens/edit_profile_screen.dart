@@ -1,7 +1,10 @@
 import 'package:cyber_clinic/BLoC/profile/profile_cubit.dart';
 import 'package:cyber_clinic/BLoC/profile/profile_states.dart';
 import 'package:cyber_clinic/data/vos/app_user_vo.dart';
+import 'package:cyber_clinic/screens/change_password_screen.dart';
+import 'package:cyber_clinic/utils/enums.dart';
 import 'package:cyber_clinic/utils/navigation_extension.dart';
+import 'package:cyber_clinic/widgets/button_widget.dart';
 import 'package:cyber_clinic/widgets/loading_widget.dart';
 import 'package:cyber_clinic/widgets/profile_image_widget.dart';
 import 'package:cyber_clinic/widgets/text_field_widget.dart';
@@ -23,6 +26,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       TextEditingController(text: widget.userProfile.bio);
   late final TextEditingController _nameController =
       TextEditingController(text: widget.userProfile.name);
+  late final TextEditingController _phoneController =
+      TextEditingController(text: widget.userProfile.phone);
+  late final TextEditingController _ageController =
+      TextEditingController(text: widget.userProfile.age.toString());
 
   late final profileCubit = context.read<ProfileCubit>();
 
@@ -30,6 +37,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void dispose() {
     _bioController.dispose();
     _nameController.dispose();
+    _phoneController.dispose();
+    _ageController.dispose();
     super.dispose();
   }
 
@@ -69,24 +78,49 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          child: Column(
-            children: [
-              ProfileImageWidget(),
-              const Gap(25),
-              const Text("Bio"),
-              const Gap(10),
-              CustomTextField(
-                  controller: _bioController,
-                  hintText: "User Bio",
-                  isObscure: false),
-              const Gap(25),
-              const Text("New Name"),
-              const Gap(10),
-              CustomTextField(
-                  controller: _nameController,
-                  hintText: "User name",
-                  isObscure: false),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ProfileImageWidget(),
+                const Gap(25),
+                const Text("Bio"),
+                const Gap(10),
+                CustomTextField(
+                    controller: _bioController,
+                    hintText: "User Bio",
+                    isObscure: false),
+                const Gap(25),
+                const Text("New Name"),
+                const Gap(10),
+                CustomTextField(
+                    controller: _nameController,
+                    hintText: "User name",
+                    isObscure: false),
+                const Gap(25),
+                const Text("New Phone"),
+                const Gap(10),
+                CustomTextField(
+                    controller: _phoneController,
+                    keyboardType: TextInputType.number,
+                    validator: Validator.phone,
+                    hintText: "User phone",
+                    isObscure: false),
+                const Gap(25),
+                const Text("Age"),
+                const Gap(10),
+                CustomTextField(
+                    controller: _ageController,
+                    keyboardType: TextInputType.number,
+                    hintText: "User age",
+                    isObscure: false),
+                const Gap(25),
+                CustomButtonWidget(
+                    function: () =>
+                        context.navigateToNext(const ChangePasswordScreen()),
+                    functionName: "Change password"),
+                const Gap(25),
+              ],
+            ),
           ),
         ),
       ),

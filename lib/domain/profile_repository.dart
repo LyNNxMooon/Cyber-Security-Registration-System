@@ -4,4 +4,6 @@ abstract class ProfileRepo {
   Future<AppUserVO?> fetchUserProfile(String uid);
 
   Future<void> updateUserProfile(AppUserVO updatedProfile);
+
+  Future<void> changePassword(String oldPassword, String newPassword);
 }
