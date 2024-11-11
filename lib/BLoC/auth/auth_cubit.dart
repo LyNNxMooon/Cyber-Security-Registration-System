@@ -1,13 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cyber_clinic/BLoC/auth/auth_states.dart';
+import 'package:cyber_clinic/app.dart';
 import 'package:cyber_clinic/data/vos/app_user_vo.dart';
 import 'package:cyber_clinic/domain/auth_repository.dart';
+
 import 'package:cyber_clinic/utils/enums.dart';
 import 'package:cyber_clinic/utils/navigation_extension.dart';
+
 import 'package:cyber_clinic/widgets/success_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_2fa/flutter_2fa.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -187,5 +191,25 @@ class AuthCubit extends Cubit<AuthStates> {
         emit(AuthError(error.toString()));
       }
     }
+  }
+
+  // Activate 2 Factor Authorization
+
+  Future<void> activate2Fa(BuildContext context, String email) async {
+    Flutter2FA().activate(
+      context: context,
+      appName: "Cyber Clinic",
+      email: email,
+    );
+  }
+
+  //Verify 2 Factor Authorization
+
+  Future<void> verify2Fa(BuildContext context) async {
+    Flutter2FA().verify(context: context, page: MyApp()).then(
+      (value) async {
+        checkAuth();
+      },
+    );
   }
 }
