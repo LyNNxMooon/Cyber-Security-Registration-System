@@ -1,5 +1,6 @@
 import 'package:cyber_clinic/BLoC/profile/profile_cubit.dart';
 import 'package:cyber_clinic/BLoC/profile/profile_states.dart';
+import 'package:cyber_clinic/data/vos/app_user_vo.dart';
 import 'package:cyber_clinic/screens/edit_profile_screen.dart';
 import 'package:cyber_clinic/utils/navigation_extension.dart';
 import 'package:cyber_clinic/widgets/loading_widget.dart';
@@ -49,8 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ))
                 ],
               ),
-              body: profileWidget(context, profileState.userProfile.email,
-                  profileState.userProfile.bio),
+              body: profileWidget(context, profileState.userProfile),
             ),
           );
         } else {
@@ -65,51 +65,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget profileWidget(BuildContext context, String userEmail, String userBio) {
+  Widget profileWidget(BuildContext context, AppUserVO user) {
     return Center(
       child: Column(
         children: [
           Text(
-            userEmail,
+            user.email,
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
           const Gap(25),
           ProfileImageWidget(),
           const Gap(25),
-          Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Bio",
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
-              ),
-            ),
-          ),
+          userInfoWidget("Bio", user.bio.isEmpty ? "Empty bio..." : user.bio),
           const Gap(25),
-          Container(
-            padding: const EdgeInsets.all(25),
-            width: double.infinity,
-            color: Theme.of(context).colorScheme.secondary,
-            child: Text(
-              userBio.isEmpty ? "Empty bio..." : userBio,
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary),
-            ),
-          ),
+          userInfoWidget("Phone", user.phone.isEmpty ? " - " : user.phone),
           const Gap(25),
-          Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Post",
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
-              ),
-            ),
-          ),
+          userInfoWidget("Age", user.age.toString()),
+          const Gap(25),
         ],
       ),
+    );
+  }
+
+  Widget userInfoWidget(String title, String info) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 25),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
+          ),
+        ),
+        const Gap(25),
+        Container(
+          padding: const EdgeInsets.all(25),
+          margin: EdgeInsets.symmetric(horizontal: 15),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(12)),
+          width: double.infinity,
+          child: Text(
+            info,
+            style:
+                TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+          ),
+        ),
+      ],
     );
   }
 }
