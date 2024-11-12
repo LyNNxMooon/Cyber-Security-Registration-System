@@ -1,4 +1,5 @@
 import 'package:cyber_clinic/BLoC/auth/auth_cubit.dart';
+import 'package:cyber_clinic/app.dart';
 
 import 'package:cyber_clinic/screens/profile_screen.dart';
 import 'package:cyber_clinic/screens/settings_screen.dart';
@@ -34,7 +35,10 @@ class CustomDrawerWidget extends StatelessWidget {
               CustomDrawerTileWidget(
                 title: "H O M E",
                 icon: Icons.home,
-                function: () => context.navigateBack(),
+                function: () {
+                  authCubit.checkAuth();
+                  context.navigateWithReplacement(MyApp());
+                },
               ),
               CustomDrawerTileWidget(
                 title: "P R O F I L E",

@@ -1,7 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:cyber_clinic/BLoC/auth/auth_cubit.dart';
+
+import 'package:cyber_clinic/widgets/banned_user_info_widget.dart';
 import 'package:cyber_clinic/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final authCubit = context.read<AuthCubit>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Home"),
       ),
       drawer: const CustomDrawerWidget(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child:
-            ListView(children: [item(context), item(context), item(context)]),
-      ),
+      body: authCubit.currentUser?.isBanned ?? false
+          ? const BannedUserInfoWidget()
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: ListView(
+                  children: [item(context), item(context), item(context)]),
+            ),
     );
   }
 
